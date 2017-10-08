@@ -28,8 +28,6 @@ class Request extends \stdClass {
      * @param array $server
      * @param array $get
      * @param array $post
-     * @param $userId
-     * @param string $action
      */
     public function __construct(array $server, array $get, array $post) {
         $this->server = $server;
