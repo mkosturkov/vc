@@ -2,7 +2,7 @@
 
 namespace MilkoKosturkov\VC\Common;
 
-use MilkoKosturkov\VC\Configuration;
+use MilkoKosturkov\VC\Configuration\Configuration;
 use PHPUnit\Framework\TestCase;
 
 class UseCaseFactoryTestMockUseCase {
