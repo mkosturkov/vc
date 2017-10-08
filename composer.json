@@ -1,0 +1,23 @@
+{
+    "name": "milkokosturkov/vc",
+    "description": "A view-controller framework",
+    "type": "library",
+    "require-dev": {
+        "phpunit/phpunit": "^6.4"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Milko Kosturkov",
+            "email": "mkosturkov@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "MilkoKosturkov\\VC\\": "src/"
+        }
+    }
+}
