@@ -2,7 +2,7 @@
 
 namespace MilkoKosturkov\VC\UI\CLI;
 
-class Command extends \stdClass {
+class Command {
 
     private $command;
 

@@ -2,7 +2,9 @@
 
 namespace MilkoKosturkov\VC\UI\Common;
 
+use MilkoKosturkov\VC\Common\DotNotionAccessorProxy;
 use MilkoKosturkov\VC\Common\UseCaseExecutionInfo;
+use MilkoKosturkov\VC\Exceptions\UndefinedKeyException;
 
 class Router {
 
@@ -25,12 +27,12 @@ class Router {
     }
 
     /**
-     * @param \stdClass $request
+     * @param DotNotionAccessorProxy $request
      *
      * @return UseCaseExecutionInfo
      * @throws \MilkoKosturkov\VC\UI\Common\RouteNotFoundException
      */
-    public function matchRequest(\stdClass $request) {
+    public function matchRequest(DotNotionAccessorProxy $request) {
         foreach ($this->routes as $route) {
             if ($this->isMatch($request, $route['match'])) {
                 return UseCaseExecutionInfo::fromArray($route['useCase']);
@@ -39,10 +41,14 @@ class Router {
         throw new RouteNotFoundException('Could not find route for request');
     }
 
-    private function isMatch(\stdClass $request, array $criteria) {
+    private function isMatch(DotNotionAccessorProxy $request, array $criteria) {
         $isMatch = true;
-        while ($isMatch && list ($field, $expected) = each($criteria)) {
-            $isMatch = $isMatch && !is_null($request->$field) && ($request->$field == $expected || $expected == '.*');
+        foreach ($criteria as $field => $expected) {
+            try {
+                $isMatch = $isMatch && ($request->$field == $expected || $expected == '.*');
+            } catch (UndefinedKeyException $e) {
+                return false;
+            }
         }
         return $isMatch;
     }

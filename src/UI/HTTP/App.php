@@ -2,6 +2,7 @@
 
 namespace MilkoKosturkov\VC\UI\HTTP;
 
+use MilkoKosturkov\VC\Common\DotNotionAccessorProxy;
 use MilkoKosturkov\VC\UI\Common\BaseApp;
 use MilkoKosturkov\VC\UI\Common\RouteNotFoundException;
 use MilkoKosturkov\VC\UI\HTTP\Views\BaseView;
@@ -12,7 +13,7 @@ class App extends BaseApp {
     public function run() {
         $response = new Response();
         try {
-            $request = Request::fromGlobals();
+            $request = new DotNotionAccessorProxy(Request::fromGlobals());
             list ($data, $viewClass) = $this->execute($request, __DIR__ . '/routes.php');
             if (empty ($viewClass)) {
                 $viewClass = JSON::class;

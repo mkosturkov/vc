@@ -2,10 +2,7 @@
 
 namespace MilkoKosturkov\VC\UI\HTTP;
 
-use MilkoKosturkov\VC\Common\DotNotionAccessorTrait;
-
-class Request extends \stdClass {
-    use DotNotionAccessorTrait;
+class Request {
 
     /**
      * @var array
@@ -47,5 +44,26 @@ class Request extends \stdClass {
      */
     public function getMethod() {
         return $this->server['REQUEST_METHOD'];
+    }
+
+    /**
+     * @return array
+     */
+    public function getServer(): array {
+        return $this->server;
+    }
+
+    /**
+     * @return array
+     */
+    public function getGet(): array {
+        return $this->get;
+    }
+
+    /**
+     * @return array
+     */
+    public function getPost(): array {
+        return $this->post;
     }
 }
