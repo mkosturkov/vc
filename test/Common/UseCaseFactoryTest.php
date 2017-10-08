@@ -18,7 +18,7 @@ class UseCaseFactoryTest extends TestCase {
 
     public function setUp() {
         parent::setUp();
-        $this->factory = new UseCaseFactory(new Configuration());
+        $this->factory = new UseCaseFactory(new Configuration(new DotNotionAccessorProxy([])));
     }
 
     public function testMakeUseCase() {
